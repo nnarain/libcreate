@@ -14,7 +14,10 @@ set(PACKAGE_VERSION 3.0.0)
 
 option(LIBCREATE_BUILD_TESTS "Enable the build of tests." ON)
 
-find_package(Boost REQUIRED COMPONENTS system thread)
+# boost_system is header-only since Boost 1.69 and the compiled stub lib was
+# dropped in later releases (gone in conda-forge's 1.90); only thread remains
+# a compiled component.
+find_package(Boost REQUIRED COMPONENTS thread)
 find_package(Threads REQUIRED)
 
 # Default to C++11
